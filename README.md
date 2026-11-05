@@ -36,23 +36,34 @@ git clone https://github.com/Magistr556/MlOps8.git
 cd MlOps8
 ```
 ## Установка зависимостей:
+```python
 pip install uv
 uv sync --all-groups
+```
 
 ## Получение данных из DagsHub Storage:
+```python
 dvc pull
+```
 
 ## Запуск полного пайплайна:
+```python
 dvc repro
+```
 
 ## Просмотр метрик:
+```python
 dvc metrics show
+```
 
 ## Запуск тестов:
+```python
 pytest -v
 
 ## Проверка качества кода:
+```python
 pre-commit run --all-files
+```
 
 ## Версионирование данных
 Для хранения и версионирования исходных данных используется DVC.
@@ -61,8 +72,10 @@ Git хранит код, конфигурации и метафайлы DVC.
 
 Для восстановления конкретной версии проекта используются
 Git-теги и команда:
+```python
 git checkout v1
 dvc checkout
+```
 
 ## Воспроизводимость
 Параметры эксперимента задаются в params.yaml.
