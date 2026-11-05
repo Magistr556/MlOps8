@@ -1,0 +1,118 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+    - path: data/raw/student-mat.csv
+      hash: md5
+      md5: 4dc304be95c60de6ee13fb8769469dd7
+      size: 56993
+    - path: src/prepare.py
+      hash: md5
+      md5: 9fe9dec7b667dde90351fa955a580ac4
+      size: 996
+    params:
+      params.yaml:
+        prepare:
+          test_size: 0.2
+          random_state: 42
+    outs:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: 0a7a86963721244002c0c38a55927b2a
+      size: 8573
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 7637b280374505e73c70d59eed1a6f9e
+      size: 33638
+  featurize:
+    cmd: python src/featurize.py
+    deps:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: 0a7a86963721244002c0c38a55927b2a
+      size: 8573
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 7637b280374505e73c70d59eed1a6f9e
+      size: 33638
+    - path: src/featurize.py
+      hash: md5
+      md5: 4b213e7cb1444c638005478690cb2fd5
+      size: 2000
+    params:
+      params.yaml:
+        featurize:
+          scale_numeric: true
+    outs:
+    - path: data/features/X_test.npy
+      hash: md5
+      md5: 772ca71647eaef82d697ca2580515648
+      size: 36784
+    - path: data/features/X_train.npy
+      hash: md5
+      md5: cc6e28cdb3986e62d0935307741b8c57
+      size: 146752
+    - path: data/features/preprocessor.joblib
+      hash: md5
+      md5: 54a28d5ed8f91e4b395450bddf9ca287
+      size: 6972
+    - path: data/features/y_test.npy
+      hash: md5
+      md5: d06ae33ef20bb6d6d665dfca0bdc0f7b
+      size: 760
+    - path: data/features/y_train.npy
+      hash: md5
+      md5: 5033ea3a61e0428f90302bdde7cdb510
+      size: 2656
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/features/X_train.npy
+      hash: md5
+      md5: cc6e28cdb3986e62d0935307741b8c57
+      size: 146752
+    - path: data/features/y_train.npy
+      hash: md5
+      md5: 5033ea3a61e0428f90302bdde7cdb510
+      size: 2656
+    - path: src/train.py
+      hash: md5
+      md5: 42e24d34cda2e748dbbe706deafa9e46
+      size: 932
+    params:
+      params.yaml:
+        train:
+          n_estimators: 200
+          max_depth: 10
+          min_samples_split: 2
+          random_state: 42
+    outs:
+    - path: models/model.joblib
+      hash: md5
+      md5: 9aa2bd3fe440a582d940ef946bf97b81
+      size: 2363281
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - path: data/features/X_test.npy
+      hash: md5
+      md5: 772ca71647eaef82d697ca2580515648
+      size: 36784
+    - path: data/features/y_test.npy
+      hash: md5
+      md5: d06ae33ef20bb6d6d665dfca0bdc0f7b
+      size: 760
+    - path: models/model.joblib
+      hash: md5
+      md5: 9aa2bd3fe440a582d940ef946bf97b81
+      size: 2363281
+    - path: src/evaluate.py
+      hash: md5
+      md5: 68c4a589429c0dd6cb324483049b22f9
+      size: 887
+    outs:
+    - path: reports/metrics.json
+      hash: md5
+      md5: dceae0e9932cbde6e6ce28d9e60421a1
+      size: 94
