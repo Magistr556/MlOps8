@@ -5,8 +5,8 @@ stages:
     deps:
     - path: data/raw/student-mat.csv
       hash: md5
-      md5: 4dc304be95c60de6ee13fb8769469dd7
-      size: 56993
+      md5: 7a4c9295a668c851ea0456fa86035332
+      size: 41983
     - path: src/prepare.py
       hash: md5
       md5: 9fe9dec7b667dde90351fa955a580ac4
@@ -19,7 +19,7 @@ stages:
     outs:
     - path: data/processed/test.csv
       hash: md5
-      md5: 0a7a86963721244002c0c38a55927b2a
+      md5: 805ac37da1e23e4797747b1199076bc0
       size: 8573
     - path: data/processed/train.csv
       hash: md5
@@ -30,7 +30,7 @@ stages:
     deps:
     - path: data/processed/test.csv
       hash: md5
-      md5: 0a7a86963721244002c0c38a55927b2a
+      md5: 805ac37da1e23e4797747b1199076bc0
       size: 8573
     - path: data/processed/train.csv
       hash: md5
@@ -47,7 +47,7 @@ stages:
     outs:
     - path: data/features/X_test.npy
       hash: md5
-      md5: 772ca71647eaef82d697ca2580515648
+      md5: 429fac71bb2f662d6fe41ee45154463d
       size: 36784
     - path: data/features/X_train.npy
       hash: md5
@@ -97,7 +97,7 @@ stages:
     deps:
     - path: data/features/X_test.npy
       hash: md5
-      md5: 772ca71647eaef82d697ca2580515648
+      md5: 429fac71bb2f662d6fe41ee45154463d
       size: 36784
     - path: data/features/y_test.npy
       hash: md5
@@ -114,5 +114,5 @@ stages:
     outs:
     - path: reports/metrics.json
       hash: md5
-      md5: dceae0e9932cbde6e6ce28d9e60421a1
-      size: 94
+      md5: 1b91f8ce5345138e90a4204124b46e4a
+      size: 95
