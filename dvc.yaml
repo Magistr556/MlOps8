@@ -1,0 +1,47 @@
+stages:
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+      - src/prepare.py
+      - data/raw/student-mat.csv
+    params:
+      - prepare
+    outs:
+      - data/processed/train.csv
+      - data/processed/test.csv
+
+  featurize:
+    cmd: python src/featurize.py
+    deps:
+      - src/featurize.py
+      - data/processed/train.csv
+      - data/processed/test.csv
+    params:
+      - featurize
+    outs:
+      - data/features/X_train.npy
+      - data/features/X_test.npy
+      - data/features/y_train.npy
+      - data/features/y_test.npy
+      - data/features/preprocessor.joblib
+
+  train:
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - data/features/X_train.npy
+      - data/features/y_train.npy
+    params:
+      - train
+    outs:
+      - models/model.joblib
+
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+      - src/evaluate.py
+      - data/features/X_test.npy
+      - data/features/y_test.npy
+      - models/model.joblib
+    metrics:
+      - reports/metrics.json

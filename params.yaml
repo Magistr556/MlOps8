@@ -1,0 +1,12 @@
+prepare:
+  test_size: 0.2
+  random_state: 42
+
+featurize:
+  scale_numeric: true
+
+train:
+  n_estimators: 200
+  max_depth: 10
+  min_samples_split: 2
+  random_state: 42
