@@ -31,10 +31,10 @@
 
 ## Установка и запуск
 Клонирование репозитория:
-
+```python
 git clone https://github.com/Magistr556/MlOps8.git
 cd MlOps8
-
+```
 ## Установка зависимостей:
 pip install uv
 uv sync --all-groups
